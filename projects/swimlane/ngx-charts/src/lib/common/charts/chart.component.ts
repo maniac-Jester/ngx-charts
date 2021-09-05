@@ -40,10 +40,11 @@ import { ScaleType } from '../types/scale-type.enum';
         [height]="view[1]"
         [width]="legendWidth"
         [activeEntries]="activeEntries"
+        [labelTrimSize]="labelTrimSize"
+        [labelTrim]="labelTrim"
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
-        (labelDeactivate)="legendLabelDeactivate.emit($event)"
-      >
+        (labelDeactivate)="legendLabelDeactivate.emit($event)">
       </ngx-charts-legend>
     </div>
   `,
@@ -61,6 +62,8 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: LegendType;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
+  @Input() labelTrim: boolean = false;
+  @Input() labelTrimSize: number = 10;
 
   @Output() legendLabelClick = new EventEmitter<string>();
   @Output() legendLabelActivate = new EventEmitter<{ name: string }>();

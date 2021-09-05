@@ -31,6 +31,8 @@ import { ViewDimensions } from '../common/types/view-dimension.interface';
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       [animations]="animations"
+      [labelTrimSize]="labelTrimSize"
+      [labelTrim]="labelTrim"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
@@ -212,6 +214,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() xScaleMax: number;
   @Input() yScaleMin: number;
   @Input() yScaleMax: number;
+  @Input() labelTrim: boolean = false;
+  @Input() labelTrimSize: number = 10;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

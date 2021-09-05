@@ -106,7 +106,7 @@ const twoPI = 2 * Math.PI;
               [tooltipTemplate]="tooltipTemplate"
               (select)="onClick($event)"
               (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
+              (deactivate)="onDeactivate($event)" 
             />
           </svg:g>
         </svg:g>

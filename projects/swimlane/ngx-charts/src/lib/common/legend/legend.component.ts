@@ -32,11 +32,12 @@ export interface LegendEntry {
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
+              [labelTrimSize]="labelTrimSize"
+              [labelTrim]="labelTrim"
               [isActive]="isActive(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
-              (deactivate)="deactivate($event)"
-            >
+              (deactivate)="deactivate($event)">
             </ngx-charts-legend-entry>
           </li>
         </ul>
@@ -55,6 +56,8 @@ export class LegendComponent implements OnChanges {
   @Input() width: number;
   @Input() activeEntries;
   @Input() horizontal = false;
+  @Input() labelTrim: boolean = false;
+  @Input() labelTrimSize: number = 10;
 
   @Output() labelClick: EventEmitter<string> = new EventEmitter();
   @Output() labelActivate: EventEmitter<{ name: string }> = new EventEmitter();

@@ -1,4 +1,12 @@
-import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+  HostListener,
+  EventEmitter
+} from '@angular/core';
+import {trimLabel} from "@swimlane/ngx-charts/common/trim-label.helper";
 
 @Component({
   selector: 'ngx-charts-legend-entry',
@@ -6,7 +14,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventE
     <span [title]="formattedLabel" tabindex="-1" [class.active]="isActive" (click)="select.emit(formattedLabel)">
       <span class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </span>
       <span class="legend-label-text">
-        {{ trimmedLabel }}
+        {{ labelTrim ? trimLabel(label, labelTrimSize) : trimmedLabel }}
       </span>
     </span>
   `,
@@ -17,11 +25,19 @@ export class LegendEntryComponent {
   @Input() label: string;
   @Input() formattedLabel: string;
   @Input() isActive: boolean = false;
+  @Input() labelTrim: boolean = false;
+  @Input() labelTrimSize: number = 10;
 
   @Output() select: EventEmitter<string> = new EventEmitter();
   @Output() activate: EventEmitter<{ name: string }> = new EventEmitter();
   @Output() deactivate: EventEmitter<{ name: string }> = new EventEmitter();
   @Output() toggle: EventEmitter<string> = new EventEmitter();
+
+  trimLabel: (label: string, max?: number) => string;
+
+  constructor() {
+    this.trimLabel = trimLabel;
+  }
 
   get trimmedLabel(): string {
     return this.formattedLabel || '(empty)';
